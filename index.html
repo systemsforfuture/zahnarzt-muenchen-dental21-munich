@@ -283,6 +283,11 @@ footer{padding:clamp(48px,6vw,96px) 0 32px;border-top:1px solid var(--border)}
   .svc-card{transition:none}
   .btn,.btn-primary,.nav,.nav-cta{transition:none}
 }
+
+/* Display Font for Headings */
+h1, h2, h3, .t-hero, .t-section, .t-sub, .section-title, .hero-title {
+  font-family: 'Playfair Display', Georgia, serif !important;
+}
 </style>
 
     <style>
@@ -297,7 +302,8 @@ footer{padding:clamp(48px,6vw,96px) 0 32px;border-top:1px solid var(--border)}
     .ft-social svg { width: 14px !important; height: 14px !important; }
     .review-stars svg { width: 20px !important; height: 20px !important; }
     </style>
-    </head>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
 <body>
 
 <!-- NAV -->
@@ -328,7 +334,7 @@ footer{padding:clamp(48px,6vw,96px) 0 32px;border-top:1px solid var(--border)}
   <div class="container hero-grid">
   <div class="hero-text">
     <p class="t-label hero-label">Zahnarztpraxis in Munich</p>
-    <h1 class="t-hero hero-title">Willkommen bei Zahnarzt München - Dental21</h1>
+    <h1 class="t-hero hero-title">Zahnarzt München - Dental21</h1>
     <p class="t-body-lg hero-desc">Qualität und Professionalität in Munich.</p>
     <div class="hero-actions">
       <a href="tel:089221987" class="btn btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Termin vereinbaren</a>
@@ -506,6 +512,24 @@ addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>80),{passi
 document.querySelectorAll('a[href^="#"]').forEach(a=>
   a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})})
 );
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+// Reveal sections on scroll
+document.querySelectorAll('section').forEach(sec => {
+  gsap.from(sec.children, {
+    y: 40, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out',
+    scrollTrigger: { trigger: sec, start: 'top 85%', toggleActions: 'play none none none' }
+  });
+});
+// Hero fallback: ensure visible after 2s
+setTimeout(() => {
+  document.querySelectorAll('.hero, .hero *, [class*="hero"]').forEach(el => {
+    el.style.opacity = '1'; el.style.visibility = 'visible'; el.style.transform = 'none';
+  });
+}, 2000);
 </script>
 </body>
 </html>
